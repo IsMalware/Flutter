@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'ui/home.dart';
+import 'ui/detector_de_gestos.dart';
 
 void main() => runApp(
-  MaterialApp( 
-    title: 'Andaime',
-    home: Home(),
+
+  MaterialApp(
+    
+    home: DetectorGestos(),
+  
   ),
+
 );

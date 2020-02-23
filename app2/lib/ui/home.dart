@@ -4,6 +4,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    botaoFlutuante() => debugPrint('Botão Flutuante');
     
     return Scaffold(
 
@@ -27,7 +29,7 @@ class Home extends StatelessWidget {
             
             icon: Icon(Icons.access_alarms),
             
-            onPressed: () => debugPrint('Alarme!!')
+            onPressed: () => debugPrint('Alarme!!'),
           
           ),
 
@@ -116,12 +118,22 @@ class Home extends StatelessWidget {
 
           BottomNavigationBarItem(icon: Icon(Icons.print),
 
-            title: Text('Print')
+            title: Text('Print'),
           
           ),
 
         ],
-      
+
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        
+        onPressed: botaoFlutuante,
+
+        child: Icon(Icons.add),
+
+        backgroundColor: Colors.orangeAccent,
+
       ),
 
     );
