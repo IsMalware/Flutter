@@ -56,96 +56,115 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('IMC'),
-        centerTitle: true,
-        backgroundColor: Colors.deepPurple[500],
-      ),
-      body: Container(
-        alignment: Alignment.center,
-        child: ListView(
-          children: <Widget>[
-            Image.asset(
-              './images/imc_logo.png',
-              height: 75.0,
-              width: 75.0,
+    return SafeArea(
+          child: Scaffold(
+        appBar: AppBar(
+          title: Text('Calculadora de IMC',
+            style: TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+              fontSize: 25
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(right: 8.0, left: 8.0),
-                color: Colors.grey.shade300,
-                child: Column(
-                  children: <Widget>[
-                    TextField(
-                      keyboardType: TextInputType.number,
-                      controller: _idadeController,
-                      decoration: InputDecoration(
-                        labelText: 'Idade',
-                        hintText: '18',
-                        icon: Icon(Icons.person_outline),
-                      ),
-                    ),
-                    TextField(
-                      keyboardType: TextInputType.number,
-                      controller: _alturaController,
-                      decoration: InputDecoration(
-                        labelText: 'Altura (m)',
-                        hintText: '1.70',
-                        icon: Icon(Icons.insert_chart),
-                      ),
-                    ),
-                    TextField(
-                      keyboardType: TextInputType.number,
-                      controller: _pesoController,
-                      decoration: InputDecoration(
-                        labelText: 'Peso (Kg)',
-                        hintText: '39.5',
-                        icon: Icon(Icons.line_weight)
-                      ),
-                    ),
-
-                    // Buttom
-                    Container(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: RaisedButton(
-                          onPressed: calcularImc,
-                          color: Colors.deepPurple,
-                          child: Text('Calcular'),
-                            textColor: Colors.white,
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.deepPurple[500],
+        ),
+        body: Container(
+          alignment: Alignment.center,
+          child: ListView(
+            children: <Widget>[
+              Image.asset(
+                './images/imc_logo.png',
+                height: 75.0,
+                width: 75.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(right: 8.0, left: 8.0),
+                    color: Colors.grey.shade300,
+                    child: Column(
+                      children: <Widget>[
+                        TextField(
+                          keyboardType: TextInputType.number,
+                          controller: _idadeController,
+                          decoration: InputDecoration(
+                            labelText: 'Idade',
+                            hintText: '18',
+                            icon: Icon(Icons.person_outline),
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                        TextField(
+                          keyboardType: TextInputType.number,
+                          controller: _alturaController,
+                          decoration: InputDecoration(
+                            labelText: 'Altura (m)',
+                            hintText: '1.70',
+                            icon: Icon(Icons.insert_chart),
+                          ),
+                        ),
+                        TextField(
+                          keyboardType: TextInputType.number,
+                          controller: _pesoController,
+                          decoration: InputDecoration(
+                            labelText: 'Peso (Kg)',
+                            hintText: '39.5',
+                            icon: Icon(Icons.line_weight)
+                          ),
+                        ),
+
+                        // Buttom
+                        Container(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: RaisedButton(
+                              onPressed: calcularImc,
+                              color: Colors.deepPurple,
+                              child: Text('Calcular'),
+                              textColor: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('${resultado.toStringAsFixed(2)}',
-                  style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.w500,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 20.0,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RichText(
+                    text: 
+                      TextSpan(
+                        text: 'Você possui $_resultadoConsulta Pois seu imc é:',
+                          style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 15.0,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: '${resultado.toStringAsFixed(2)}',
+                            style: TextStyle(
+                            color: resultado < 25 ? Colors.purple : Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.italic,
+                            fontSize: 15.0,
+                          ),
+                        )
+                      ], // Children
+                    ),
                   ),
-                ),
-                Text('$_resultadoConsulta',
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w500,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 20.0
-                  ),
-                )
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
